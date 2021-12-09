@@ -10,7 +10,19 @@
 </head>
 <body>
 
+  <main id="app">
+    <header>
+      <img class="logo" src="assets/swedbank-logo.svg" alt="">
+    </header>
+    <div class="text-center">
+      <p>Welcome to SwedBank.</p>
+      <p>Please complete the form below so that we can find the best solution for you. All fields are required</p>
+      <button class="btn-primary" @click="showForm = true" v-show="!showForm">Go to form</button>
 
+     
+    </div>
+
+  </main>
   
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script> -->
