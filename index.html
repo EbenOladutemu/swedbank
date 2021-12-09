@@ -19,7 +19,50 @@
       <p>Please complete the form below so that we can find the best solution for you. All fields are required</p>
       <button class="btn-primary" @click="showForm = true" v-show="!showForm">Go to form</button>
 
-     
+      <form action="#" method="post" style="margin-top: 3rem;" v-show="showForm">
+        <span id="field1" class="form-field">
+          <label for="status">Employment Status</label>
+          <select name="status" id="status">
+            <option value="employed">Employed</option>
+            <option value="self">Business Owner/Self-Employed</option>
+          </select>
+        </span>
+        <span id="field2" class="form-field" v-show="showField">
+          <label for="noe">Name of Employer</label>
+          <input type="text" name="noe" id="noe">
+        </span>
+        <span id="field3" class="form-field" v-show="showField">
+          <label for="nob">Name of Business</label>
+          <input type="text" name="nob" id="nob">
+        </span>
+        <span id="field4" class="form-field" v-show="showField">
+          <label for="dob">Date of Birth</label>
+          <input type="date" name="dob" id="dob">
+        </span>
+        <span id="field5" class="form-field" v-show="showField">
+          <label for="reason">Reason for Loan</label>
+          <select name="reason" id="reason">
+            <option value="rent">Rent</option>
+            <option value="land">Land Purchase</option>
+            <option value="home">Home Purchase</option>
+          </select>
+        </span>
+        <span id="field6" class="form-field" v-show="showField">
+          <label for="amount">Loan Amount</label>
+          <input type="number" name="amount" id="amount">
+        </span>
+        <span id="field7" class="form-field" v-show="showField">
+          <label for="duration">Loan Duration</label>
+          <input type="range" name="duration" id="duration">
+          <span class="text-end">
+            <button type="submit" class="btn-primary w-fit-content" onclick="submit()">Submit</button>
+          </span>
+        </span>
+      </form>
+      <div class="text-left">
+        <button class="btn-primary" onclick="prev()">Previous</button>
+        <button class="btn-primary" onclick="next()">Next</button>
+      </div>
     </div>
 
   </main>
