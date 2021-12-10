@@ -5,6 +5,7 @@ new Vue({
     heading: 'hello',
     showForm: false,
     showField: false,
+    showResults: false,
     disabledPrev: true,
     disabledNext: true,
     formLabels: [],
@@ -63,6 +64,7 @@ new Vue({
       } else {
         console.log(Object.values(this.form))
         this.results = Object.values(this.form);
+        this.showResults = true;
       }
     }
   },
@@ -72,17 +74,19 @@ new Vue({
     }
     if (this.form.status === 'employed') {
       this.status.employed = true
-    } else if (this.form.status === 'self') {
+      this.status.self = false
+    } else if (this.form.status.includes('business')) {
       this.status.self = true;
+      this.status.employed = false
     }
   },
   created() {
-    const label = document.querySelectorAll('label')
-    label.forEach(element => {
-      console.log(element.innerHTML);
-      this.formLabels.push(element.innerHTML);
-    });
-    console.log(this.formLabels)
+    // const label = document.querySelectorAll('label')
+    // label.forEach(element => {
+    //   console.log(element.innerHTML);
+    //   this.formLabels.push(element.innerHTML);
+    // });
+    // console.log(this.formLabels)
   }
 })
 

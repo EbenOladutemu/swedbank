@@ -13,7 +13,7 @@
       <header>
         <img class="logo" src="assets/swedbank-logo.svg" alt="" />
       </header>
-      <div class="text-center">
+      <div class="text-center" v-show="!showResults">
         <p>Welcome to SwedBank.</p>
         <p>
           Please complete the form below so that we can find the best solution
@@ -35,7 +35,7 @@
               <select name="status" id="status" v-model="form.status">
                 <option value=""></option>
                 <option value="employed">Employed</option>
-                <option value="self">Business Owner/Self-Employed</option>
+                <option value="business-owner/self-employed">Business Owner/Self-Employed</option>
               </select>
             </span>
             <span class="form-field" v-if="fieldIndex === 1">
@@ -46,6 +46,7 @@
                   name="noe"
                   id="noe"
                   v-model="form.employer"
+                  required
                 />
                 <small
                   v-show="errorMessages.employer && form.employer.length === 0"
@@ -59,6 +60,7 @@
                   name="nob"
                   id="nob"
                   v-model="form.employer"
+                  required
                 />
                 <small
                   v-show="errorMessages.employer && form.employer.length === 0"
@@ -68,7 +70,7 @@
             </span>
             <span class="form-field" v-if="fieldIndex === 2">
               <label for="dob">Date of Birth</label>
-              <input type="date" name="dob" id="dob" v-model="form.dob" />
+              <input type="date" name="dob" id="dob" v-model="form.dob" required />
               <small v-show="errorMessages.dob && form.dob.length === 0"
                 >Please select your Date of Birth</small
               >
@@ -77,8 +79,8 @@
               <label for="reason">Reason for Loan</label>
               <select name="reason" id="reason" v-model="form.reason">
                 <option value="rent">Rent</option>
-                <option value="land">Land Purchase</option>
-                <option value="home">Home Purchase</option>
+                <option value="land-purchase">Land Purchase</option>
+                <option value="home-purchase">Home Purchase</option>
               </select>
               <small v-show="errorMessages.reason && form.reason.length === 0"
                 >Please select a Reason for Loan</small
@@ -91,6 +93,7 @@
                 name="amount"
                 id="amount"
                 v-model="form.amount"
+                required
               />
               <small v-show="errorMessages.amount && form.amount.length === 0"
                 >Please enter an amount</small
@@ -107,6 +110,7 @@
                 max="24"
                 @input="getDuration"
                 v-model="form.duration"
+                required
               />
               <span class="months">
                 {{ form.duration.length === 0 ? 0 : form.duration }}
@@ -145,11 +149,25 @@
           </button>
         </div>
       </div>
-      <div v-for="label in formLabels">
-        <p>{{ label }}</p>
-      </div>
-      <div v-for="result in results">
-        <p>{{ result }}</p>
+      <div class="text-center" v-show="showResults">
+        <h2>Form Result</h2>
+        <p>Thank you for your application. These are your results. Our representative would get back to you soon. Cheers!</p>
+        <div class="d-flex results" >
+          <ul>
+            <li>Employment Status</li>
+            <li v-if="status.employed">Name of Employer</li>
+            <li v-if="status.self">Name of Business</li>
+            <li>Date of Birth</li>
+            <li>Reason for Loan</li>
+            <li>Loan Amount</li>
+            <li>Loan Duration (in months)</li>
+          </ul>
+          <ul style="margin-left: 2rem;">
+            <li v-for="result in results">
+              {{ result }}
+            </li>
+          </ul> 
+        </div>
       </div>
     </main>
 
