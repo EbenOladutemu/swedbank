@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="http://fonts.cdnfonts.com/css/helvetica-neue-9" rel="stylesheet">
   <link rel="stylesheet" href="./assets/style.css">
   <title>SwedBank Form</title>
 </head>
@@ -20,51 +19,61 @@
       <button class="btn-primary" @click="showForm = true" v-show="!showForm">Go to form</button>
 
       <form action="#" method="post" style="margin-top: 3rem;" v-show="showForm">
-        <span id="field1" class="form-field">
-          <label for="status">Employment Status</label>
-          <select name="status" id="status">
-            <option value="employed">Employed</option>
-            <option value="self">Business Owner/Self-Employed</option>
-          </select>
-        </span>
-        <span id="field2" class="form-field" v-show="showField">
-          <label for="noe">Name of Employer</label>
-          <input type="text" name="noe" id="noe">
-        </span>
-        <span id="field3" class="form-field" v-show="showField">
-          <label for="nob">Name of Business</label>
-          <input type="text" name="nob" id="nob">
-        </span>
-        <span id="field4" class="form-field" v-show="showField">
-          <label for="dob">Date of Birth</label>
-          <input type="date" name="dob" id="dob">
-        </span>
-        <span id="field5" class="form-field" v-show="showField">
-          <label for="reason">Reason for Loan</label>
-          <select name="reason" id="reason">
-            <option value="rent">Rent</option>
-            <option value="land">Land Purchase</option>
-            <option value="home">Home Purchase</option>
-          </select>
-        </span>
-        <span id="field6" class="form-field" v-show="showField">
-          <label for="amount">Loan Amount</label>
-          <input type="number" name="amount" id="amount">
-        </span>
-        <span id="field7" class="form-field" v-show="showField">
-          <label for="duration">Loan Duration</label>
-          <input type="range" name="duration" id="duration">
-          <span class="text-end">
-            <button type="submit" class="btn-primary w-fit-content" onclick="submit()">Submit</button>
+        <div class="form-wrapper">
+          <span class="form-field" v-if="fieldIndex === 0">
+            <label for="status">Employment Status</label>
+            <select name="status" id="status" v-model="form.status">
+              <option value=""></option>
+              <option value="employed">Employed</option>
+              <option value="self">Business Owner/Self-Employed</option>
+            </select>
           </span>
-        </span>
+          <span class="form-field" v-if="fieldIndex === 1">
+            <div class="status" v-show="status.employed">
+              <label for="noe">Name of Employer</label>
+              <input type="text" name="noe" id="noe" v-model="form.employer">
+              <small v-show="errorMessages.employer && form.employer.length === 0">Please enter Name of Employer</small>
+            </div>
+            <div class="status" v-show="status.self">
+              <label for="nob">Name of Business</label>
+              <input type="text" name="nob" id="nob" v-model="form.employer">
+              <small v-show="errorMessages.employer && form.employer.length === 0">Please enter Name of Business</small>
+            </div>
+          </span>
+          <span class="form-field" v-if="fieldIndex === 2">
+            <label for="dob">Date of Birth</label>
+            <input type="date" name="dob" id="dob" v-model="form.dob">
+            <small v-show="errorMessages.dob && form.dob.length === 0">Please select your Date of Birth</small>
+          </span>
+          <span class="form-field" v-if="fieldIndex === 3">
+            <label for="reason">Reason for Loan</label>
+            <select name="reason" id="reason" v-model="form.reason">
+              <option value="rent">Rent</option>
+              <option value="land">Land Purchase</option>
+              <option value="home">Home Purchase</option>
+            </select>
+            <small v-show="errorMessages.reason && form.reason.length === 0">Please select a Reason for Loan</small>
+          </span>
+          <span class="form-field" v-if="fieldIndex === 4">
+            <label for="amount">Loan Amount</label>
+            <input type="number" name="amount" id="amount" v-model="form.amount">
+            <small v-show="errorMessages.amount && form.amount.length === 0">Please enter an amount</small>
+          </span>
+          <span class="form-field" v-if="fieldIndex === 5">
+            <label for="duration">Loan Duration</label>
+            <input type="range" name="duration" id="duration" v-model="form.duration">
+            <small v-show="errorMessages.duration && form.duration.length === 0">Please select a duration</small>
+            <span class="text-end">
+              <button type="submit" class="btn-primary w-fit-content">Submit</button>
+            </span>
+          </span>
+        </div>
       </form>
-      <div class="text-left">
-        <button class="btn-primary" onclick="prev()">Previous</button>
-        <button class="btn-primary" onclick="next()">Next</button>
+      <div class="text-left controls" v-show="showForm">
+        <button class="btn-primary" @click="prev" :disabled="disabledPrev || fieldIndex === 0">Previous</button>
+        <button class="btn-primary" @click="next" :disabled="disabledNext || fieldIndex === 5">Next</button>
       </div>
     </div>
-
   </main>
   
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>

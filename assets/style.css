@@ -8,7 +8,7 @@ body {
   padding: 1rem;
 }
 
-form, form > span{
+form, .form-wrapper > span, .status{
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -32,6 +32,12 @@ input {
   padding-left: 0.5rem;
 }
 
+small {
+  margin-top: -0.75rem;
+  margin-bottom: 0.75rem;
+  color: #f51414;
+}
+
 .logo {
   width: 50%;
   margin: auto;
@@ -47,7 +53,7 @@ input {
 }
 
 .text-left {
-  text-align: end;
+  text-align: left;
 }
 
 .btn-primary {
@@ -63,12 +69,26 @@ input {
   background: #EE7023;
 }
 
+.btn-primary:disabled {
+  background: #EE7023;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+ .btn-primary:active{
+  background: #e96d21;
+}
+
 .w-fit-content {
   width: fit-content;
 }
 
+.d-none {
+  display: none !important;
+}
+
 @media screen and (min-width: 991px) {
-  form {
+  form, .controls {
     width: 38%;
     margin: auto;
   }
