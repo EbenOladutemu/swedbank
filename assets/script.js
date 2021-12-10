@@ -31,7 +31,30 @@ new Vue({
     }
   },
   methods: {
-    
+    next() {
+      if (this.fieldIndex === 1 && this.form.employer.length === 0) {
+        this.errorMessages.employer = true
+      } else if (this.fieldIndex === 2 && this.form.dob.length === 0) {
+        this.errorMessages.dob = true
+      } else if (this.fieldIndex === 3 && this.form.reason.length === 0) {
+        this.errorMessages.reason = true
+      } else if (this.fieldIndex === 4 && this.form.amount.length === 0) {
+        this.errorMessages.amount = true
+      } else if (this.fieldIndex === 5 && this.form.duration.length === 0) {
+        this.errorMessages.duration = true
+      } else {
+        this.fieldIndex++
+        this.disabledPrev = false
+        this.errorMessages.employer = false
+        this.errorMessages.dob = false
+        this.errorMessages.reason = false
+        this.errorMessages.amount = false
+        this.errorMessages.duration = false
+      }
+    },
+    prev(){
+      this.fieldIndex--
+    }
   },
   updated() {
     if (this.form.status !== '') {
