@@ -59,7 +59,7 @@ new Vue({
       this.form.duration = e.target.value;
     },
     submit() { 
-      if (this.fieldIndex === 5 && this.form.duration === 0) {
+      if (this.fieldIndex === 5 && this.form.duration == 0) {
         this.errorMessages.duration = true
       } else {
         console.log(Object.values(this.form))
