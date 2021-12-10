@@ -7,7 +7,8 @@ new Vue({
     showField: false,
     disabledPrev: true,
     disabledNext: true,
-    fields: [],
+    formLabels: [],
+    results: [],
     fieldIndex: 0,
     liveTabShow: 0,
     form: {
@@ -16,7 +17,7 @@ new Vue({
       dob: '',
       reason: '',
       amount: '',
-      duration: ''
+      duration: 0
     },
     status: {
       employed: false,
@@ -40,8 +41,6 @@ new Vue({
         this.errorMessages.reason = true
       } else if (this.fieldIndex === 4 && this.form.amount.length === 0) {
         this.errorMessages.amount = true
-      } else if (this.fieldIndex === 5 && this.form.duration.length === 0) {
-        this.errorMessages.duration = true
       } else {
         this.fieldIndex++
         this.disabledPrev = false
@@ -54,6 +53,17 @@ new Vue({
     },
     prev(){
       this.fieldIndex--
+    },
+    getDuration(e) {
+      this.form.duration = e.target.value;
+    },
+    submit() { 
+      if (this.fieldIndex === 5 && this.form.duration === 0) {
+        this.errorMessages.duration = true
+      } else {
+        console.log(Object.values(this.form))
+        this.results = Object.values(this.form);
+      }
     }
   },
   updated() {
@@ -67,24 +77,30 @@ new Vue({
     }
   },
   created() {
+    const label = document.querySelectorAll('label')
+    label.forEach(element => {
+      console.log(element.innerHTML);
+      this.formLabels.push(element.innerHTML);
+    });
+    console.log(this.formLabels)
   }
 })
 
 
-const form = document.querySelector('form');
-const label = document.querySelectorAll('label')
-let formLabels = [];
-let formValues = [];
+// const form = document.querySelector('form');
+// const label = document.querySelectorAll('label')
+// let formLabels = [];
+// let formValues = [];
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const data = new FormData(form);
-  label.forEach(element => {
-    formLabels.push(element.innerHTML);
-  });
-  for (const iterator of data.values()) {
-    formValues.push(iterator);
-  }
-  console.log(...formLabels, ...formValues);
-})
+// form.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//   const data = new FormData(form);
+//   label.forEach(element => {
+//     formLabels.push(element.innerHTML);
+//   });
+//   for (const iterator of data.values()) {
+//     formValues.push(iterator);
+//   }
+//   console.log(...formLabels, ...formValues);
+// })
 
