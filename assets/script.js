@@ -90,6 +90,10 @@ new Vue({
   }
 })
 
+window.onbeforeunload = function() {
+  return "Data will be lost if you refresh the page. Are you sure?";
+};
+
 
 // const form = document.querySelector('form');
 // const label = document.querySelectorAll('label')

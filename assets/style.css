@@ -6,15 +6,19 @@
 
 body {
   padding: 1rem;
+  background-color: #fbf2ea;
 }
 
-form, .form-wrapper > span, .status{
+form,
+.form-wrapper > span,
+.status {
   display: flex;
   flex-direction: column;
   text-align: left;
 }
 
-select, input {
+select,
+input {
   margin: 1rem 0;
   margin-top: 0.5rem;
   padding: 0.75rem 0.25rem;
@@ -25,7 +29,7 @@ select, input {
 }
 
 select {
-  background: #EBF8F2;
+  background: #ebf8f2;
 }
 
 input {
@@ -38,10 +42,11 @@ small {
   color: #f51414;
 }
 
-
 ul {
   padding-left: 0;
+  margin: -1rem;
   font-size: 25px;
+  text-align: left;
 }
 
 li {
@@ -69,7 +74,7 @@ li {
 
 .btn-primary {
   background: #fa7f25;
-  border: 1px solid #EE7023;
+  border: 1px solid #ee7023;
   border-radius: 5px;
   color: #fff;
   padding: 1rem;
@@ -77,16 +82,16 @@ li {
 }
 
 .btn-primary:hover {
-  background: #EE7023;
+  background: #ee7023;
 }
 
 .btn-primary:disabled {
-  background: #EE7023;
+  background: #ee7023;
   opacity: 0.6;
   cursor: not-allowed;
 }
 
- .btn-primary:active{
+.btn-primary:active {
   background: #e96d21;
 }
 
@@ -104,6 +109,7 @@ li {
 
 .results {
   justify-content: center;
+  margin-bottom: 4.5rem !important;
 }
 
 .months {
@@ -114,7 +120,8 @@ li {
 }
 
 @media screen and (min-width: 991px) {
-  form, .controls {
+  form,
+  .controls {
     width: 38%;
     margin: auto;
   }
@@ -124,7 +131,7 @@ li {
     margin: auto;
   }
 
- .logo {
-   width: 20%;
- }
+  .logo {
+    width: 20%;
+  }
 }
